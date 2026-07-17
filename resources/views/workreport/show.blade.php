@@ -265,6 +265,16 @@
 
             <div class="card mb-3">
                 <div class="card-header">
+                    <strong>Activity</strong>
+                </div>
+
+                <div class="card-body">
+                    {!! nl2br(e($workreport->activity)) !!}
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
                     <strong>Trouble</strong>
                 </div>
 
