@@ -1,0 +1,48 @@
+.preview-img {
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.preview-box {
+    position: relative;
+}
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    cursor: pointer;
+}
+#preview-container .col-4 {
+    position: relative;
+}
+#preview-container button {
+    margin-top: 5px;
+}
+
+.field-group {
+    margin-bottom: 8px; /* lebih kecil dari mb-2 */
+}
+
+.field-group strong {
+    display: block;
+    margin-bottom: 2px; /* 🔥 ini yang bikin rapat */
+}
+
+.field-text {
+    background: #f8f9fa;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+.badge-status {
+    font-size: 14px;
+    padding: 6px 14px;
+    font-weight: 500;
+}

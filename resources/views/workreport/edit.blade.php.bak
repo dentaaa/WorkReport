@@ -1,0 +1,162 @@
+@extends('layouts.mantis')
+
+@section('content')
+    <div class="">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title">Form Data Pegawai</h4>
+                <div>
+                    <a href="{{ route('workreport.index') }}">Kembali</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('workreport.update', $workreport->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group my-2">
+                        <label for="ama">Nama</label>
+                        <input type="text" name="nama" id="nama"
+                            class="form-control @error('nama')
+                            is-invalid
+                        @enderror"
+                            value="{{ $workreport->nama }}" autofocus>
+                        @error('nama')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="nik">NIK</label>
+                        <input type="text" name="nik" id="nik"
+                            class="form-control @error('nik')
+                            is-invalid
+                        @enderror"
+                            value="{{ $workreport->nik }}" readonly>
+                        @error('nik')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="jabatan">Jabatan</label>
+                        <input type="text" name="jabatan" id="jabatan"
+                            class="form-control @error('jabatan')
+                            is-invalid
+                        @enderror"
+                            value="{{ $workreport->jabatan }}">
+                        @error('jabatan')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="tanggal">Tanggal</label>
+                        <input type="date" name="tanggal" id="tanggal"
+                            class="form-control @error('tanggal')
+                            is-invalid
+                        @enderror"
+                            value="{{ $workreport->tanggal }}">
+                        @error('tanggal')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="nomor_unit">Nomor Unit</label>
+                        <input type="number" name="nomor_unit" id="nomor_unit"
+                            class="form-control @error('nomor_unit')
+                            is-invalid
+                        @enderror"
+                            value="{{ $workreport->nomor_unit }}">
+                        @error('nomor_unit')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="hm_unit">HM Unit</label>
+                        <input type="number" name="hm_unit" id="hm_unit"
+                            class="form-control @error('hm_unit')
+                            is-invalid
+                        @enderror"
+                            value="{{ $workreport->hm_unit }}">
+                        @error('hm_unit')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="trouble">Trouble</label>
+                        <textarea name="trouble" id="trouble" cols="30" rows="10"
+                            class="form-control @error('trouble')
+                            is-invalid
+                        @enderror">
+                            {{ $workreport->trouble }}
+                        </textarea>
+                        @error('trouble')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="activity">Activity</label>
+                        <textarea name="activity" id="activity" cols="30" rows="10"
+                            class="form-control @error('activity')
+                            is-invalid
+                        @enderror">
+                        {{ $workreport->activity }}
+                        </textarea>
+                        @error('activity')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="foto">Foto Kegiatan</label>
+                        <input type="file" name="foto" id="foto"
+                            class="form-control @error('activity')
+                            is-invalid
+                        @enderror">
+                        @error('foto')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="shift">Shift</label>
+                        <select name="shift" id="shift"
+                            class="form-control @error('shift')
+                            is-invalid
+                        @enderror">
+                            <option value="">Pilih Shift</option>
+                            <option value="day" {{ $workreport->shift == 'day' ? 'selected' : '' }}>Day</option>
+                            <option value="night" {{ $workreport->shift == 'night' ? 'selected' : '' }}>Night</option>
+                        </select>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="status">Status</label>
+                        <select name="status" id="status"
+                            class="form-control @error('status')
+                            is-invalid
+                        @enderror">
+                            <option value="">Pilih Status</option>
+                            <option value="ready" {{ $workreport->status == 'ready' ? 'selected' : '' }}>Ready</option>
+                            <option value="continue" {{ $workreport->status == 'continue' ? 'selected' : '' }}>Continue
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="jam_mulai">Jam Mulai</label>
+                        <input type="time" name="jam_mulai" id="jam_mulai"
+                            class="form-control @error('jam_mulai')
+                            is-invalid
+                        @enderror"
+                            value="{{ $workreport->jam_mulai }}" readonly>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="jam_berakhir">Jam Berakhir</label>
+                        <input type="time" name="jam_berakhir" id="jam_berakhir"
+                            class="form-control @error('jam_berakhir')
+                            is-invalid
+                        @enderror"
+                            value="{{ $workreport->jam_berakhir }}" readonly>
+                    </div>
+                    <div class="my-2 d-flex justify-content-end">
+                        <button class="btn btn-primary">Submit Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
