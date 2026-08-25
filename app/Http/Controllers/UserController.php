@@ -8,7 +8,19 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     /** @var \App\Models\User $user */
+    //     $user = Auth::user();
+    //     if (!$user->isAdmin()) {
+    //         abort(403);
+    //     }
+
+    //     $users = User::all();
+    //     return view('user.index', compact('users'));
+    // }
+
+    public function index(Request $request)
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
@@ -16,7 +28,24 @@ class UserController extends Controller
             abort(403);
         }
 
-        $users = User::all();
+        $query = User::query();
+
+        if ($request->filled('search')) {
+
+            $keyword = trim($request->search);
+
+            $query->where(function ($q) use ($keyword) {
+
+                $q->where('name', 'like', "%{$keyword}%")
+                    ->orWhere('email', 'like', "%{$keyword}%")
+                    ->orWhere('role', 'like', "%{$keyword}%");
+            });
+        }
+
+        $users = $query
+            ->orderBy('name')
+            ->get();
+
         return view('user.index', compact('users'));
     }
 

@@ -13,6 +13,34 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <div class="user-table-toolbar">
+
+                        <div class="user-search-wrapper">
+
+                            <form method="GET" action="{{ route('users.index') }}">
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text bg-white">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+
+                                    <input type="text" name="search" class="form-control"
+                                        placeholder="Cari nama, email, atau role..." value="{{ request('search') }}">
+
+                                    @if (request('search'))
+                                        <a href="{{ route('users.index') }}" class="btn btn-outline-secondary">
+                                            X
+                                        </a>
+                                    @endif
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
                     <table class="table table-bordered w-100 text-start" id="table">
                         <thead>
                             <tr>
@@ -23,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @forelse($users as $user)
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
@@ -39,7 +67,8 @@
                                                 </option>
                                                 <option value="Supervisor" {{ $user->isSupervisor() ? 'selected' : '' }}>
                                                     Supervisor</option>
-                                                <option value="Dept. Head" {{ $user->isDeptHead() ? 'selected' : '' }}>Dept.
+                                                <option value="Dept. Head" {{ $user->isDeptHead() ? 'selected' : '' }}>
+                                                    Dept.
                                                     Head</option>
                                                 <option value="Trainer" {{ $user->isTrainer() ? 'selected' : '' }}>Trainer
                                                 </option>
@@ -53,7 +82,18 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">
+                                        @if (request('search'))
+                                            Tidak ada user yang cocok dengan
+                                            "<strong>{{ request('search') }}</strong>".
+                                        @else
+                                            Belum ada user.
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

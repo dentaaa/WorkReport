@@ -733,18 +733,56 @@ class WorkReportController extends Controller
         return view('workreport.show', compact('workreport'));
     }
 
+    // public function downloadPdf($id)
+    // {
+    //     /** @var \App\Models\User $user */
+    //     $user = Auth::user();
+
+    //     if (!$user->isAdmin() && !$user->isForeman()) {
+    //         abort(403);
+    //     }
+
+    //     $workreport = WorkReport::with([
+    //         'photos',
+    //         'members'
+    //     ])->findOrFail($id);
+
+    //     $pdf = Pdf::loadView(
+    //         'workreport.pdf',
+    //         compact('workreport')
+    //     );
+
+    //     $pdf->setPaper('A4', 'portrait');
+
+    //     $filename =
+    //         'work_report_' .
+    //         $workreport->nama . '_' .
+    //         now()->format('d-m-Y_H-i-s') .
+    //         '.pdf';
+
+    //     return $pdf->download($filename);
+    // }
+
     public function downloadPdf($id)
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        if (!$user->isAdmin() && !$user->isForeman()) {
+        if (
+            !$user->isAdmin() &&
+            !$user->isForeman() &&
+            !$user->isDeptHead() &&
+            !$user->isSupervisor()
+        ) {
             abort(403);
         }
 
         $workreport = WorkReport::with([
             'photos',
-            'members'
+            'members',
+            'user',
+            'reviewer',
+            'approver'
         ])->findOrFail($id);
 
         $pdf = Pdf::loadView(

@@ -37,7 +37,7 @@ Route::get(
     '/workreport/{id}/pdf',
     [WorkReportController::class, 'downloadPdf']
 )
-    ->middleware(['auth', 'role:Foreman,Admin'])
+    ->middleware(['auth', 'role:Foreman,Supervisor,Dept. Head,Admin'])
     ->name('workreport.pdf');
 
 Route::post('/workreport/{id}/status', [WorkReportController::class, 'updateStatus'])
