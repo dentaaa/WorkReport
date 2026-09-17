@@ -125,42 +125,47 @@ class WorkReportExport implements
                         ? $report->component
                         : null,
 
-                    // I - Trouble
+                    // I - Work Type
+                    $index === 0
+                        ? $report->work_type
+                        : null,
+
+                    // J - Trouble
                     $index === 0
                         ? $report->trouble
                         : null,
 
-                    // J - Activity
+                    // K - Activity
                     $index === 0
                         ? $report->activity
                         : null,
 
-                    // K - Shift
+                    // L - Shift
                     $index === 0
                         ? ucfirst($report->shift)
                         : null,
 
-                    // L - Status
+                    // M - Status
                     $index === 0
                         ? ucfirst($report->status)
                         : null,
 
-                    // M - Jam Mulai
+                    // N - Jam Mulai
                     $index === 0
                         ? $this->timeToExcel($report->jam_mulai)
                         : null,
 
-                    // N - Jam Berakhir
+                    // O - Jam Berakhir
                     $index === 0
                         ? $this->timeToExcel($report->jam_berakhir)
                         : null,
 
-                    // O - Continue Note
+                    // P - Continue Note
                     $index === 0
                         ? $report->continue_note
                         : null,
 
-                    // P - Status Verifikasi
+                    // Q - Status Verifikasi
                     $index === 0
                         ? $report->approval_status
                         : null,
@@ -181,7 +186,7 @@ class WorkReportExport implements
 
             if ($members->count() > 1) {
 
-                foreach ([1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] as $columnNumber) {
+                foreach ([1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17] as $columnNumber) {
 
                     $column = $this->columnLetter($columnNumber);
 
@@ -209,6 +214,7 @@ class WorkReportExport implements
             'Nomor Unit',
             'HM Unit',
             'Component',
+            'Work Type',
             'Trouble',
             'Activity',
             'Shift',
@@ -295,7 +301,7 @@ class WorkReportExport implements
                 }
 
                 $sheet
-                    ->getStyle("A1:P{$highestRow}")
+                    ->getStyle("A1:Q{$highestRow}")
                     ->getBorders()
                     ->getAllBorders()
                     ->setBorderStyle(Border::BORDER_THIN);
@@ -321,11 +327,15 @@ class WorkReportExport implements
                     ->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
                 $sheet
-                    ->getStyle("E2:P{$highestRow}")
+                    ->getStyle("E2:Q{$highestRow}")
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-
+                // Work Type
+                $sheet
+                    ->getStyle("I2:I{$highestRow}")
+                    ->getAlignment()
+                    ->setHorizontal(Alignment::HORIZONTAL_CENTER);
                 /*
                 |--------------------------------------------------------------------------
                 | Trouble & Activity
@@ -334,7 +344,7 @@ class WorkReportExport implements
 
                 // Trouble & Activity
                 $sheet
-                    ->getStyle("I2:J{$highestRow}")
+                    ->getStyle("J2:K{$highestRow}")
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_LEFT)
                     ->setWrapText(true);
@@ -348,7 +358,7 @@ class WorkReportExport implements
 
                 // Continue Note
                 $sheet
-                    ->getStyle("O2:O{$highestRow}")
+                    ->getStyle("O2:P{$highestRow}")
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_LEFT)
                     ->setWrapText(true);
@@ -371,7 +381,7 @@ class WorkReportExport implements
                 */
 
                 $sheet
-                    ->getStyle("M2:N{$highestRow}")
+                    ->getStyle("N2:O{$highestRow}")
                     ->getNumberFormat()
                     ->setFormatCode('hh:mm:ss');
 
@@ -384,7 +394,7 @@ class WorkReportExport implements
                 $sheet->freezePane('A2');
 
                 $sheet
-                    ->getStyle("A2:P{$highestRow}")
+                    ->getStyle("A2:Q{$highestRow}")
                     ->getAlignment()
                     ->setVertical(Alignment::VERTICAL_CENTER);
 
@@ -405,14 +415,15 @@ class WorkReportExport implements
                     'F' => 15, // Nomor Unit
                     'G' => 12, // HM Unit
                     'H' => 22, // Component
-                    'I' => 45, // Trouble
-                    'J' => 45, // Activity
-                    'K' => 12, // Shift
-                    'L' => 15, // Status
-                    'M' => 13, // Jam Mulai
-                    'N' => 13, // Jam Berakhir
-                    'O' => 35, // Continue Note
-                    'P' => 25, // Status Verifikasi
+                    'I' => 18, // Work Type
+                    'J' => 45, // Trouble
+                    'K' => 45, // Activity
+                    'L' => 12, // Shift
+                    'M' => 15, // Status
+                    'N' => 13, // Jam Mulai
+                    'O' => 13, // Jam Berakhir
+                    'P' => 35, // Continue Note
+                    'Q' => 25, // Status Verifikasi
 
                 ];
 
@@ -431,7 +442,20 @@ class WorkReportExport implements
 
                 $sheet
                     ->getRowDimension(1)
-                    ->setRowHeight(25);
+                    ->setRowHeight(30);
+
+                // Header Activity
+                $sheet
+                    ->getStyle('K1')
+                    ->getAlignment()
+                    ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                    ->setVertical(Alignment::VERTICAL_CENTER)
+                    ->setWrapText(false);
+
+                $sheet
+                    ->getStyle('K1')
+                    ->getFont()
+                    ->setBold(true);
             },
         ];
     }
@@ -482,9 +506,9 @@ class WorkReportExport implements
     */
 
         $texts = [
-            'I' => $sheet->getCell("I{$startRow}")->getValue(),
             'J' => $sheet->getCell("J{$startRow}")->getValue(),
-            'O' => $sheet->getCell("O{$startRow}")->getValue(),
+            'K' => $sheet->getCell("K{$startRow}")->getValue(),
+            'P' => $sheet->getCell("P{$startRow}")->getValue(),
         ];
 
         /*
@@ -495,18 +519,18 @@ class WorkReportExport implements
 
         $lineCounts = [
 
-            'I' => $this->calculateTextLines(
-                $texts['I'],
-                45
-            ),
-
             'J' => $this->calculateTextLines(
                 $texts['J'],
                 45
             ),
 
-            'O' => $this->calculateTextLines(
-                $texts['O'],
+            'K' => $this->calculateTextLines(
+                $texts['K'],
+                45
+            ),
+
+            'P' => $this->calculateTextLines(
+                $texts['P'],
                 35
             ),
         ];
@@ -518,9 +542,9 @@ class WorkReportExport implements
     */
 
         $requiredLines = max(
-            $lineCounts['I'],
             $lineCounts['J'],
-            $lineCounts['O']
+            $lineCounts['K'],
+            $lineCounts['P']
         );
 
         /*

@@ -198,6 +198,12 @@
                             : {{ \Carbon\Carbon::parse($workreport->jam_berakhir)->format('H:i') }}
                         </div>
                     </div>
+                    <div class="row mb-2">
+                        <div class="col-md-3"><strong>Work Type</strong></div>
+                        <div class="col-md-9">
+                            : {{ $workreport->work_type }}
+                        </div>
+                    </div>
 
                     <div class="row mb-2">
                         <div class="col-md-3"><strong>Shift</strong></div>

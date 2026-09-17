@@ -223,6 +223,36 @@
                             @enderror
                         </div>
                         <div class="form-group my-2">
+                            <label for="work_type">Work Type</label>
+                            <select name="work_type" id="work_type" class="form-select" required>
+                                <option value="">Pilih Work Type</option>
+
+                                <option value="Schedule"
+                                    {{ old('work_type', $workreport->work_type) == 'Schedule' ? 'selected' : '' }}>
+                                    Schedule
+                                </option>
+
+                                <option value="Unschedule"
+                                    {{ old('work_type', $workreport->work_type) == 'Unschedule' ? 'selected' : '' }}>
+                                    Unschedule
+                                </option>
+
+                                <option value="Abuse"
+                                    {{ old('work_type', $workreport->work_type) == 'Abuse' ? 'selected' : '' }}>
+                                    Abuse
+                                </option>
+
+                                <option value="Accident"
+                                    {{ old('work_type', $workreport->work_type) == 'Accident' ? 'selected' : '' }}>
+                                    Accident
+                                </option>
+                            </select>
+
+                            @error('work_type')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group my-2">
                             <label for="trouble">Trouble</label>
                             <textarea name="trouble" id="trouble" cols="30" rows="10"
                                 class="form-control @error('trouble')
@@ -246,7 +276,7 @@
                         </div>
                         @if (!$isAdminEditingOthers)
                             <div class="form-group my-2">
-                                <label for="photos">Tambah Foto Kegiatan (Max 2 MB per foto)</label>
+                                <label for="photos">Tambah Foto Kegiatan</label>
                                 {{-- <input type="file" name="foto" id="foto"
                             class="form-control @error('activity')
                             is-invalid
@@ -280,7 +310,8 @@
                                             class="img-fluid rounded mb-2 preview-img">
 
                                         @if (!$isAdminEditingOthers)
-                                            <button type="button" onclick="deleteExistingPhoto({{ $photo->id }}, this)"
+                                            <button type="button"
+                                                onclick="deleteExistingPhoto({{ $photo->id }}, this)"
                                                 class="btn btn-danger btn-sm">
                                                 Hapus
                                             </button>
@@ -298,8 +329,10 @@
                         @enderror"
                                 @disabled($isAdminEditingOthers)>
                                 <option value="">Pilih Shift</option>
-                                <option value="day" {{ $workreport->shift == 'day' ? 'selected' : '' }}>Day</option>
-                                <option value="night" {{ $workreport->shift == 'night' ? 'selected' : '' }}>Night</option>
+                                <option value="day" {{ $workreport->shift == 'day' ? 'selected' : '' }}>Day
+                                </option>
+                                <option value="night" {{ $workreport->shift == 'night' ? 'selected' : '' }}>Night
+                                </option>
                             </select>
                         </div>
                         <div class="form-group my-2">

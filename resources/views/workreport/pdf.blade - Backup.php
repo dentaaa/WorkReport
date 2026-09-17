@@ -23,6 +23,12 @@
             margin: 0 0 5px 0;
         }
 
+        .generated {
+            text-align: center;
+            font-size: 9px;
+            color: #777;
+            margin-bottom: 18px;
+        }
 
         .section {
             margin-bottom: 15px;
@@ -144,102 +150,37 @@
             border: none;
         }
 
-
-        /* HEADER */
         .header-table {
             width: 100%;
             border-collapse: collapse;
-            table-layout: fixed;
-            margin: 0 0 12px 0;
-            page-break-inside: avoid;
+            margin-bottom: 15px;
         }
 
-        .header-table>tbody>tr>td {
-            border: 1px solid #555;
+        .header-table td {
+            border: none;
             padding: 0;
-            vertical-align: middle;
+            vertical-align: top;
         }
 
-        /* Lebar kolom */
         .header-logo {
-            width: 29%;
-            text-align: center;
-            vertical-align: middle;
+            width: 33.33%;
+            text-align: left;
+            padding-top: 4px !important;
         }
 
-        .header-title {
-            width: 51%;
-            text-align: center;
-            vertical-align: middle;
-            padding: 0 !important;
-        }
-
-
-        /* Logo */
         .header-logo img {
-            width: 150px;
+            width: 210px;
             height: auto;
         }
 
-        /* Judul tengah */
-        .header-title-top {
-            border-bottom: 1px solid #555;
-            padding: 5px 2px;
-            font-size: 10px;
-            font-weight: bold;
-            line-height: 1.2;
+        .header-title {
+            width: 33.34%;
+            text-align: center;
+            vertical-align: top;
         }
 
-        .header-title-bottom {
-            padding: 7px 2px;
-            font-size: 10px;
-            font-weight: normal;
-            line-height: 1.4;
-        }
-
-        .header-title-bottom strong {
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-
-        /* Metadata kanan */
-        .header-meta {
-            width: 20%;
-            padding: 0 !important;
-            vertical-align: middle;
-            border-left: 1px solid #555 !important;
-            border-right: 1px solid #555 !important;
-        }
-
-        .header-meta table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-            font-size: 7px;
-            border: none;
-        }
-
-        .header-meta td {
-            border: none;
-            border-bottom: 1px solid #555;
-            padding: 3px 4px;
-            vertical-align: middle;
-            font-weight: normal;
-        }
-
-        .header-meta tr:last-child td {
-            border-bottom: none;
-        }
-
-        .header-meta .meta-label {
-            width: 48%;
-            text-align: left;
-        }
-
-        .header-meta .meta-value {
-            width: 52%;
-            text-align: left;
+        .header-spacer {
+            width: 33.33%;
         }
 
         .report-title {
@@ -247,6 +188,12 @@
             font-weight: bold;
             line-height: 1.1;
             margin-top: 2px;
+        }
+
+        .generated {
+            margin-top: 5px;
+            font-size: 9px;
+            color: #777;
         }
 
         .approval-status-table {
@@ -316,47 +263,39 @@
         {{ now()->format('d-m-Y H:i:s') }} WIB
     </div> --}}
 
-
     <table class="header-table">
+
         <tr>
+
+            {{-- LOGO --}}
             <td class="header-logo">
+
                 <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/tbu.png'))) }}"
                     alt="Tata Bara Utama">
+
             </td>
 
+
+            {{-- JUDUL --}}
             <td class="header-title">
-                <div class="header-title-top">
-                    TBU MANAGEMENT SYSTEM
+
+                <div class="report-title">
+                    WORK REPORT
                 </div>
 
-                <div class="header-title-bottom">
-                    FORM<br>
-                    <strong>WORK ORDER</strong>
+                <div class="generated">
+                    Generated at:
+                    {{ now()->format('d-m-Y H:i:s') }} WIB
                 </div>
+
             </td>
 
 
-            <td class="header-meta">
-                <table>
-                    <tr>
-                        <td class="meta-label">No</td>
-                        <td class="meta-value">: </td>
-                    </tr>
-                    <tr>
-                        <td class="meta-label">Tanggal Terbit</td>
-                        <td class="meta-value">: </td>
-                    </tr>
-                    <tr>
-                        <td class="meta-label">Revisi</td>
-                        <td class="meta-value">: </td>
-                    </tr>
-                    <tr>
-                        <td class="meta-label">Halaman</td>
-                        <td class="meta-value">: </td>
-                    </tr>
-                </table>
-            </td>
+            {{-- KOLOM KOSONG UNTUK MENJAGA CENTER --}}
+            <td class="header-spacer"></td>
+
         </tr>
+
     </table>
 
     {{-- ========================================================= --}}

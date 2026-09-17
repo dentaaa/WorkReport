@@ -4,7 +4,7 @@
     <div class="">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="card-title">Form Data Data Work Report</h4>
+                <h4 class="card-title">Form Data Work Report</h4>
                 <div>
                     <a href="{{ route('workreport.index') }}">Kembali</a>
                 </div>
@@ -165,6 +165,22 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label for="work_type" class="form-label">
+                            Work Type <span class="text-danger">*</span>
+                        </label>
+
+                        <select name="work_type" id="work_type" class="form-select" required>
+                            <option value="">Pilih Work Type</option>
+                            <option value="Schedule">Schedule</option>
+                            <option value="Unschedule">Unschedule</option>
+                            <option value="Abuse">Abuse</option>
+                            <option value="Accident">Accident</option>
+                        </select>
+                        @error('work_type')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div class="form-group my-2">
                         <label for="trouble">Trouble</label>
                         <textarea name="trouble" id="trouble" cols="30" rows="10"
@@ -186,7 +202,7 @@
                         @enderror
                     </div>
                     <div class="form-group my-2">
-                        <label for="photos">Foto Kegiatan (Max 2 MB per foto)</label>
+                        <label for="photos">Foto Kegiatan</label>
                         {{-- <input type="file" name="foto" id="foto"
                             class="form-control @error('activity')
                             is-invalid
