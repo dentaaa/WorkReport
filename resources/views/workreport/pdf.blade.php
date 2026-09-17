@@ -340,19 +340,19 @@
                 <table>
                     <tr>
                         <td class="meta-label">No</td>
-                        <td class="meta-value">: </td>
+                        <td class="meta-value">: TBU-FM-PLT-002</td>
                     </tr>
                     <tr>
                         <td class="meta-label">Tanggal Terbit</td>
-                        <td class="meta-value">: </td>
+                        <td class="meta-value">: 11-08-2022</td>
                     </tr>
                     <tr>
                         <td class="meta-label">Revisi</td>
-                        <td class="meta-value">: </td>
+                        <td class="meta-value">: 00</td>
                     </tr>
                     <tr>
                         <td class="meta-label">Halaman</td>
-                        <td class="meta-value">: </td>
+                        <td class="meta-value">: 1 dari 1</td>
                     </tr>
                 </table>
             </td>

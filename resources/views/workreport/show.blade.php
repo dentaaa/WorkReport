@@ -84,16 +84,16 @@
             <p><strong>No. WO :</strong> {{ $workreport->no_wo }}</p>
 
             <div class="field-group">
-                <strong>Activity:</strong>
+                <strong>Trouble:</strong>
                 <div class="field-text">
-                    {!! nl2br(e($workreport->activity)) !!}
+                    {!! nl2br(e($workreport->trouble)) !!}
                 </div>
             </div>
 
             <div class="field-group">
-                <strong>Trouble:</strong>
+                <strong>Activity:</strong>
                 <div class="field-text">
-                    {!! nl2br(e($workreport->trouble)) !!}
+                    {!! nl2br(e($workreport->activity)) !!}
                 </div>
             </div>
 
@@ -268,6 +268,16 @@
 
                 </div>
             </div>
+            
+            <div class="card mb-3">
+                <div class="card-header">
+                    <strong>Trouble</strong>
+                </div>
+
+                <div class="card-body">
+                    {!! nl2br(e($workreport->trouble)) !!}
+                </div>
+            </div>
 
             <div class="card mb-3">
                 <div class="card-header">
@@ -276,16 +286,6 @@
 
                 <div class="card-body">
                     {!! nl2br(e($workreport->activity)) !!}
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-header">
-                    <strong>Trouble</strong>
-                </div>
-
-                <div class="card-body">
-                    {!! nl2br(e($workreport->trouble)) !!}
                 </div>
             </div>
 
